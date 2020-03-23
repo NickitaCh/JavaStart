@@ -1,4 +1,4 @@
-package com.startjava.lesson2.person;
+package com.startjava.lesson2_3.person;
 
 public class Person {
     char sex = 'M';

@@ -1,4 +1,4 @@
-package com.startjava.lesson2.guessNumber;
+package com.startjava.lesson2_3.guessNumber;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

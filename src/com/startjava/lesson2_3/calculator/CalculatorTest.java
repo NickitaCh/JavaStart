@@ -1,4 +1,4 @@
-package com.startjava.lesson2.calculator;
+package com.startjava.lesson2_3.calculator;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
