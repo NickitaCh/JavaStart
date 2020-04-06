@@ -1,4 +1,4 @@
-package com.startjava.lesson2_3.calculator;
+package com.startjava.lesson2_3_4.calculator;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,16 +9,16 @@ public class CalculatorTest {
         String answer = "да";
         while(answer.equals("да")) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            System.out.print("Введите математическое выражение: ");
+            String Str = new String(reader.readLine());
+            String[] math = Str.split(" ");
+
             Calculator calc = new Calculator();
-            System.out.print("Введите первое число: ");
-            int num1 = Integer.parseInt(reader.readLine());
-            System.out.print("Введите знак математической операции: ");
-            String sign = reader.readLine();
-            System.out.print("Введите второе число: ");
-            int num2 = Integer.parseInt(reader.readLine());
+            int num1 = Integer.parseInt(math[0]);
+            int num2 = Integer.parseInt(math[2]);
+            String sign = math[1];
             int result = calc.calculate(num1, sign, num2);
             System.out.println(num1 + sign + num2 + " = " + result);
-        
             do {
                 System.out.print("Хотите продолжить? [да/нет]: ");
                 answer = reader.readLine();

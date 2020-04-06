@@ -1,4 +1,4 @@
-package com.startjava.lesson2_3.wolf;
+package com.startjava.lesson2_3_4.wolf;
 
 public class Wolf {
     private char sex = 'M';

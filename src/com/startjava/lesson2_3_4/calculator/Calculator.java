@@ -1,4 +1,4 @@
-package com.startjava.lesson2_3.calculator;
+package com.startjava.lesson2_3_4.calculator;
 
 public class Calculator {
 
@@ -13,13 +13,9 @@ public class Calculator {
             case "/":
                 return num1 / num2;
             case "^":
-                int result = 1;
-                for (int i = 1; i <= num2; i++) {
-                    result *= num1;
-                }
-                return result;
+                return (int) Math.pow(num1, num2);
             case "%":
-                return num1 % num2;
+                return (int) Math.IEEEremainder(num1, num2);
         }
         return 0;
     }
