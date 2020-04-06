@@ -1,6 +1,5 @@
 out
-
-/.idea/misc.xml
-/.idea/modules.xml
-/.idea/vcs.xml
+/.idea/*.xml
+/.idea/.gitignore
 /startjava.iml
+.gitignore
