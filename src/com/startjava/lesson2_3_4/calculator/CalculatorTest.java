@@ -19,6 +19,7 @@ public class CalculatorTest {
             String sign = math[1];
             int result = calc.calculate(num1, sign, num2);
             System.out.println(num1 + sign + num2 + " = " + result);
+
             do {
                 System.out.print("Хотите продолжить? [да/нет]: ");
                 answer = reader.readLine();
