@@ -6,12 +6,12 @@ import java.io.*;
 
 public class CalculatorTest {
     public static void main(String[] args)  throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String answer = "да";
         while(answer.equals("да")) {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             System.out.print("Введите математическое выражение: ");
-            String Str = new String(reader.readLine());
-            String[] math = Str.split(" ");
+            String mathString = new String(reader.readLine());
+            String[] math = mathString.split(" ");
 
             Calculator calc = new Calculator();
             int num1 = Integer.parseInt(math[0]);
@@ -23,12 +23,7 @@ public class CalculatorTest {
             do {
                 System.out.print("Хотите продолжить? [да/нет]: ");
                 answer = reader.readLine();
-                if(answer.equals("да")) {
-                    break;
-                } else if (answer.equals("нет")) {
-                    break; 
-                }
-            } while (true);
+            } while (!answer.equals("да") && !answer.equals("нет"));
         }
     }
 }

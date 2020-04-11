@@ -3,7 +3,7 @@ package com.startjava.lesson2_3_4.guessNumber;
 public class Player {
     private String name;
     private int number;
-    int num[] = new int[10];
+    private int[] num = new int[10];
 
     public Player(String name) {
         this.name = name;
@@ -25,5 +25,11 @@ public class Player {
         return number;
     }
 
+    void setNum (int index, int num) {
+        this.num[index] = num;
+    }
 
+    public int[] getNum() {
+        return num;
+    }
 }
