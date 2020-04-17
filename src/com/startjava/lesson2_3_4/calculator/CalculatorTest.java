@@ -10,13 +10,13 @@ public class CalculatorTest {
         String answer = "да";
         while(answer.equals("да")) {
             System.out.print("Введите математическое выражение: ");
-            String mathString = new String(reader.readLine());
-            String[] math = mathString.split(" ");
+            String srcMathExpression = reader.readLine();
+            String[] splitMathExpression = srcMathExpression.split(" ");
 
             Calculator calc = new Calculator();
-            int num1 = Integer.parseInt(math[0]);
-            int num2 = Integer.parseInt(math[2]);
-            String sign = math[1];
+            int num1 = Integer.parseInt(splitMathExpression[0]);
+            int num2 = Integer.parseInt(splitMathExpression[2]);
+            String sign = splitMathExpression[1];
             int result = calc.calculate(num1, sign, num2);
             System.out.println(num1 + sign + num2 + " = " + result);
 

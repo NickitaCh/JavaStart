@@ -1,5 +1,7 @@
 package com.startjava.lesson2_3_4.guessNumber;
 
+import cucumber.api.java.uk.Нехай;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.*;
@@ -16,16 +18,20 @@ public class GuessNumber {
         this.player2 = player2;
     }
 
+    public GuessNumber(Player player) {
+    }
+
+
     public void play() throws IOException {
         int rnd = (int) (Math.random() * 101);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("У вас 10 попыток");
+        GuessNumber gn1 = new GuessNumber(player1);
+        GuessNumber gn2 = new GuessNumber(player2);
 
         do {
-            System.out.println(player1.getName() + " введите число : ");
-            player1.setNumber(Integer.parseInt(reader.readLine()));
-            player1.setNum(i, player1.getNumber());
-            System.out.println(compareNumbers(rnd, player1.getNumber()));
+            player1.setNumber(gn1.enterNumbers(rnd, player1.getName(), player1.getNumber()));
+            player1.setAttempts(i, player1.getNumber());
             if(i == 10) {
                 System.out.println("У " + player1.getName() + " закончились попытки");
             }
@@ -34,11 +40,8 @@ public class GuessNumber {
                 break;
             }
             i++;
-
-            System.out.println(player2.getName() + " введите число : ");
-            player2.setNumber(Integer.parseInt(reader.readLine()));
-            player2.setNum(j, player2.getNumber());
-            System.out.println(compareNumbers(rnd, player2.getNumber()));
+            player2.setNumber(gn2.enterNumbers(rnd, player2.getName(), player2.getNumber()));
+            player2.setAttempts(j, player2.getNumber());
             if(j == 10) {
                 System.out.println("У " + player2.getName() + " закончились попытки");
             }
@@ -50,6 +53,14 @@ public class GuessNumber {
         } while(player1.getNumber() != rnd && player2.getNumber() != rnd && i != 10 && j != 10);
     }
 
+    public int enterNumbers(int rnd, String name,int number) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println(name + " введите число : ");
+        number = Integer.parseInt(reader.readLine());
+        compareNumbers(rnd, number);
+        System.out.println(compareNumbers(rnd, number));
+        return number;
+    }
             
     public String compareNumbers(int rnd, int number) {
         if(number == rnd) {
@@ -61,17 +72,10 @@ public class GuessNumber {
         }
     }
 
-    public void arrPrint() {
-        int[] newPlayer1Num = Arrays.copyOfRange(player1.getNum(), 0, i);
+    public void arrPrint(int[] num) {
+        int[] newPlayer1Num = Arrays.copyOfRange(num, 0, i);
         for(int a = 0; a < i; a++) {
             System.out.print(newPlayer1Num[a] + " ");
-        }
-
-        System.out.println("");
-
-        int[] newPlayer2Num = Arrays.copyOfRange(player2.getNum(), 0, j);
-        for(int a = 0; a < j; a++) {
-            System.out.print(newPlayer2Num[a] + " ");
         }
 
         System.out.println("");

@@ -16,8 +16,10 @@ public class GuessNumberTest {
             Player player2 = new Player(reader.readLine());
             GuessNumber gn = new GuessNumber(player1, player2);
             gn.play();
-            gn.arrPrint();
-            
+            gn.arrPrint(player1.getAttemps());
+            gn.arrPrint(player2.getAttemps());
+
+
             do {
                 System.out.print("Хотите продолжить? [да/нет]: ");
                 answer = reader.readLine();
