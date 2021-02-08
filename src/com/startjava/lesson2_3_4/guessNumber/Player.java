@@ -25,7 +25,7 @@ public class Player {
         return number;
     }
 
-    void setAttempts(int index, int num) {
+    void setAttempt(int index, int num) {
         attempts[index] = num;
     }
 

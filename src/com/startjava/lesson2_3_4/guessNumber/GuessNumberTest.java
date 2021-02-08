@@ -16,8 +16,8 @@ public class GuessNumberTest {
             Player player2 = new Player(reader.readLine());
             GuessNumber gn = new GuessNumber(player1, player2);
             gn.play();
-            gn.arrPrint(player1.getAttemps());
-            gn.arrPrint(player2.getAttemps());
+            gn.showAttempts(player1.getAttemps());
+            gn.showAttempts(player2.getAttemps());
 
 
             do {

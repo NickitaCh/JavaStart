@@ -31,7 +31,7 @@ public class GuessNumber {
 
         do {
             player1.setNumber(gn1.enterNumbers(rnd, player1.getName(), player1.getNumber()));
-            player1.setAttempts(i, player1.getNumber());
+            player1.setAttempt(i, player1.getNumber());
             if(i == 10) {
                 System.out.println("У " + player1.getName() + " закончились попытки");
             }
@@ -41,7 +41,7 @@ public class GuessNumber {
             }
             i++;
             player2.setNumber(gn2.enterNumbers(rnd, player2.getName(), player2.getNumber()));
-            player2.setAttempts(j, player2.getNumber());
+            player2.setAttempt(j, player2.getNumber());
             if(j == 10) {
                 System.out.println("У " + player2.getName() + " закончились попытки");
             }
@@ -72,12 +72,13 @@ public class GuessNumber {
         }
     }
 
-    public void arrPrint(int[] num) {
-        int[] newPlayer1Num = Arrays.copyOfRange(num, 0, i);
+    public void showAttempts(int[] num) {
+        int[] attempts = Arrays.copyOfRange(num, 0, i);
         for(int a = 0; a < i; a++) {
-            System.out.print(newPlayer1Num[a] + " ");
+            System.out.print(attempts[a] + " ");
         }
-
+        Arrays.fill(attempts, 0, i, 0);
         System.out.println("");
+
     }
 }
