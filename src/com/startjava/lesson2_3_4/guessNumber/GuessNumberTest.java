@@ -14,11 +14,8 @@ public class GuessNumberTest {
             Player player1 = new Player(reader.readLine());
             System.out.print("Введите имя второго игрока: ");
             Player player2 = new Player(reader.readLine());
-            GuessNumber gn = new GuessNumber(player1, player2);
-            gn.play();
-            gn.showAttempts(player1.getAttemps());
-            gn.showAttempts(player2.getAttemps());
-
+            GuessNumber game = new GuessNumber(player1, player2);
+            game.play();
 
             do {
                 System.out.print("Хотите продолжить? [да/нет]: ");

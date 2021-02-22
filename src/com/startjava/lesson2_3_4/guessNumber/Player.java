@@ -1,15 +1,13 @@
 package com.startjava.lesson2_3_4.guessNumber;
 
+import java.util.Arrays;
+
 public class Player {
     private String name;
     private int number;
     private int[] attempts = new int[10];
 
     public Player(String name) {
-        this.name = name;
-    }
-
-    void setName(String name) {
         this.name = name;
     }
 
@@ -30,6 +28,7 @@ public class Player {
     }
 
     public int[] getAttemps() {
-        return attempts;
+        int [] attemptsCopy = Arrays.copyOf(attempts, attempts.length);
+        return attemptsCopy;
     }
 }
