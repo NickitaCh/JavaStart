@@ -12,6 +12,7 @@ public class GuessNumber {
     private Player player2;
     int i = 0;
     int j = 0;
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     public GuessNumber(Player player1, Player player2) {
         this.player1 = player1;
@@ -20,43 +21,48 @@ public class GuessNumber {
 
     public void play() throws IOException {
         int rnd = (int) (Math.random() * 101);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("У вас 10 попыток");
-        GuessNumber gn1 = new GuessNumber(player1, player1);
-        GuessNumber gn2 = new GuessNumber(player2, player2);
+        boolean stop = true;
 
         do {
-            player1.setNumber(gn1.enterNumbers(player1.getName(), player1.getNumber()));
+            player1.setNumber(enterNumber(player1.getName(), player1.getNumber()));
             System.out.println(compareNumbers(rnd, player1.getNumber()));
             player1.setAttempt(i, player1.getNumber());
             if(i == 10) {
                 System.out.println("У " + player1.getName() + " закончились попытки");
+                stop = false;
+                break;
             }
             if(player1.getNumber() == rnd) {
-                System.out.println("Игрок " + player1.getName() + " угадал число " + player1.getNumber() + " с " + i++ + " попытки");
+                i++;
+                System.out.println("Игрок " + player1.getName() + " угадал число " + player1.getNumber() + " с " + i + " попытки");
+                stop = false;
                 break;
             }
             i++;
-            player2.setNumber(gn2.enterNumbers(player2.getName(), player2.getNumber()));
+            player2.setNumber(enterNumber(player2.getName(), player2.getNumber()));
             System.out.println(compareNumbers(rnd, player2.getNumber()));
             player2.setAttempt(j, player2.getNumber());
             if(j == 10) {
                 System.out.println("У " + player2.getName() + " закончились попытки");
+                stop = false;
+                break;
             }
             if(player2.getNumber() == rnd) {
-                System.out.println("Игрок " + player2.getName() + " угадал число " + player2.getNumber() + " с " + j++ + " попытки");
+                j++;
+                System.out.println("Игрок " + player2.getName() + " угадал число " + player2.getNumber() + " с " + j + " попытки");
+                stop = false;
                 break;
             }
             j++;
-        } while(player1.getNumber() != rnd && player2.getNumber() != rnd && i != 10 && j != 10);
+        } while(stop != false);
         showAttempts(player1.getAttemps());
         showAttempts(player2.getAttemps());
         Arrays.fill(player1.getAttemps(), 0, i, 0);
-        Arrays.fill(player2.getAttemps(), 0, i, 0);
+        Arrays.fill(player2.getAttemps(), 0, j, 0);
     }
 
-    private int enterNumbers(String name,int number) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private int enterNumber(String name,int number) throws IOException {
         System.out.println(name + " введите число : ");
         number = Integer.parseInt(reader.readLine());
         return number;
@@ -73,10 +79,10 @@ public class GuessNumber {
     }
 
     private void showAttempts(int[] numbers) {
-        int[] attempts = Arrays.copyOfRange(numbers, 0, i);
-        for (int a:attempts) {
-            System.out.print(a + " ");
-        }
+        int[] attempts = numbers;
+        for (int a : attempts) {
+                System.out.print(a + " ");
+            }
         System.out.println("");
     }
 }
