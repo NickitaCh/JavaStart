@@ -20,50 +20,45 @@ public class GuessNumber {
     public void play() throws IOException {
         int secretNumber = (int) (Math.random() * 101);
         System.out.println("У вас 10 попыток");
-        boolean stop = true;
+        boolean stop;
 
         do {
-            player1.setAttempt(player1.numberOfAttempts, enterNumber(player1.getName()));
-            System.out.println(compareNumbers(secretNumber, player1.getNumber(player1.numberOfAttempts)));
-            if(player1.numberOfAttempts == 10) {
-                System.out.println("У " + player1.getName() + " закончились попытки");
-                stop = false;
+            player1.setAttempt(enterNumber(player1.getName()));
+            System.out.println(compareNumbers(secretNumber, player1.getNumber()));
+            stop = check(player1.getNumber(), secretNumber, player1.getName(), player1.getNumberOfAttempts());
+            player1.setNumberOfAttempts(player1.getNumberOfAttempts()+1);
+            if (stop == false) {
                 break;
             }
-            if(player1.getNumber(player1.numberOfAttempts) == secretNumber) {
-                player1.numberOfAttempts++;
-                System.out.println("Игрок " + player1.getName() + " угадал число " + player1.getNumber(player1.numberOfAttempts-1) + " с " + player1.numberOfAttempts + " попытки");
-                stop = false;
-                break;
-            }
-            player1.numberOfAttempts++;
-            player2.setAttempt(player2.numberOfAttempts, enterNumber(player2.getName()));
-            System.out.println(compareNumbers(secretNumber, player2.getNumber(player2.numberOfAttempts)));
-            if(player2.numberOfAttempts == 10) {
-                System.out.println("У " + player2.getName() + " закончились попытки");
-                stop = false;
-                break;
-            }
-            if(player2.getNumber(player2.numberOfAttempts) == secretNumber) {
-                player2.numberOfAttempts++;
-                System.out.println("Игрок " + player2.getName() + " угадал число " + player2.getNumber(player2.numberOfAttempts-1) + " с " + player2.numberOfAttempts + " попытки");
-                stop = false;
-                break;
-            }
-            player2.numberOfAttempts++;
+            player2.setAttempt(enterNumber(player2.getName()));
+            System.out.println(compareNumbers(secretNumber, player2.getNumber()));
+            stop = check(player2.getNumber(), secretNumber, player2.getName(), player2.getNumberOfAttempts());
+            player2.setNumberOfAttempts(player2.getNumberOfAttempts()+1);
         } while(stop != false);
-        showAttempts(player1.getAttemps(player1.numberOfAttempts));
-        showAttempts(player2.getAttemps(player2.numberOfAttempts));
-        player1.clear(player1);
-        player2.clear(player2);
+        showAttempts(player1.getAttemps());
+        showAttempts(player2.getAttemps());
+        player1.clear();
+        player2.clear();
+    }
+
+    private boolean check(int number, int secretNumber, String name, int attempts) {
+        if(attempts == 10) {
+            System.out.println("У " + name + " закончились попытки");
+            return false;
+        }
+        if(number == secretNumber) {
+            System.out.print("Игрок " + name + " угадал число " + number);
+            attempts++;
+            System.out.println(" с " + attempts + " попытки");
+            return false;
+        } else return true;
     }
 
     private int enterNumber(String name) throws IOException {
         System.out.println(name + " введите число : ");
-        int number = Integer.parseInt(reader.readLine());
-        return number;
+        return (Integer.parseInt(reader.readLine()));
     }
-            
+
     private String compareNumbers(int rnd, int number) {
         if(number == rnd) {
             return "Вы угадали!";
@@ -75,8 +70,8 @@ public class GuessNumber {
     }
 
     private void showAttempts(int[] attempts) {
-        for (int attempt : attempts) {
-                System.out.print(attempt + " ");
+        for (int number : attempts) {
+            System.out.print(number + " ");
         }
         System.out.println("");
     }

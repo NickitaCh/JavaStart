@@ -5,7 +5,15 @@ import java.util.Arrays;
 public class Player {
     private String name;
     private int[] attempts = new int[10];
-    int numberOfAttempts = 0;
+    private int numberOfAttempts = 0;
+
+    public int getNumberOfAttempts() {
+        return numberOfAttempts;
+    }
+
+    public void setNumberOfAttempts(int numberOfAttempts) {
+        this.numberOfAttempts = numberOfAttempts;
+    }
 
     public Player(String name) {
         this.name = name;
@@ -15,19 +23,19 @@ public class Player {
         return name;
     }
 
-    public int getNumber(int index) {
-        return attempts[index];
+    public int getNumber() {
+        return attempts[numberOfAttempts];
     }
 
-    void setAttempt(int index, int num) {
-        attempts[index] = num;
+    void setAttempt(int number) {
+        attempts[numberOfAttempts] = number;
     }
 
-    public int[] getAttemps(int index) {
-        return Arrays.copyOf(attempts, index);
+    public int[] getAttemps() {
+        return Arrays.copyOf(attempts, numberOfAttempts);
     }
 
-    public void clear(Player player) {
-        Arrays.fill(attempts, 0, player.numberOfAttempts, 0);
+    public void clear() {
+        Arrays.fill(attempts, 0, numberOfAttempts, 0);
     }
 }
