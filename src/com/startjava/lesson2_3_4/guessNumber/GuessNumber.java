@@ -1,11 +1,8 @@
 package com.startjava.lesson2_3_4.guessNumber;
 
-import cucumber.api.java.uk.Нехай;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.*;
-import java.util.Arrays;
 
 public class GuessNumber {
     private Player player1;
@@ -20,52 +17,52 @@ public class GuessNumber {
     public void play() throws IOException {
         int secretNumber = (int) (Math.random() * 101);
         System.out.println("У вас 10 попыток");
-        boolean stop;
 
         do {
-            player1.setAttempt(enterNumber(player1.getName()));
-            System.out.println(compareNumbers(secretNumber, player1.getNumber()));
-            stop = check(player1.getNumber(), secretNumber, player1.getName(), player1.getNumberOfAttempts());
-            player1.setNumberOfAttempts(player1.getNumberOfAttempts()+1);
-            if (stop == false) {
+            if (enterNumber(player1.getName(), player1, secretNumber) == false) {
                 break;
-            }
-            player2.setAttempt(enterNumber(player2.getName()));
-            System.out.println(compareNumbers(secretNumber, player2.getNumber()));
-            stop = check(player2.getNumber(), secretNumber, player2.getName(), player2.getNumberOfAttempts());
-            player2.setNumberOfAttempts(player2.getNumberOfAttempts()+1);
-        } while(stop != false);
+            } else enterNumber(player2.getName(), player2, secretNumber);
+        } while(true);
         showAttempts(player1.getAttemps());
         showAttempts(player2.getAttemps());
         player1.clear();
         player2.clear();
     }
 
-    private boolean check(int number, int secretNumber, String name, int attempts) {
+    private boolean enterNumber(String name, Player player, int secretNumber) throws IOException {
+        System.out.println(name + " введите число : ");
+        player.setAttempt(Integer.parseInt(reader.readLine()));
+        if (!compareNumbers(secretNumber, player.getNumber(), player.getName())) {
+            check(player.getNumber(), secretNumber, player.getName(), player.getNumberOfAttempts());
+            player.setNumberOfAttempts(player.getNumberOfAttempts());
+            return false;
+        } else {
+            check(player.getNumber(), secretNumber, player.getName(), player.getNumberOfAttempts());
+            player.setNumberOfAttempts(player.getNumberOfAttempts());
+        } return true;
+    }
+
+    private boolean compareNumbers(int secretNumber, int number, String name) {
+        if(number == secretNumber) {
+            System.out.println("Вы угадали!");
+            System.out.print("Игрок " + name + " угадал число " + number);
+            return false;
+        } else if(number < secretNumber) {
+            System.out.println("Число меньше искомого");
+            return true;
+        } else {
+            System.out.println("Число больше искомого");
+            return true;
+        }
+    }
+
+    private void check(int number, int secretNumber, String name, int attempts) {
         if(attempts == 10) {
             System.out.println("У " + name + " закончились попытки");
-            return false;
         }
         if(number == secretNumber) {
-            System.out.print("Игрок " + name + " угадал число " + number);
             attempts++;
             System.out.println(" с " + attempts + " попытки");
-            return false;
-        } else return true;
-    }
-
-    private int enterNumber(String name) throws IOException {
-        System.out.println(name + " введите число : ");
-        return (Integer.parseInt(reader.readLine()));
-    }
-
-    private String compareNumbers(int rnd, int number) {
-        if(number == rnd) {
-            return "Вы угадали!";
-        } else if(number < rnd) {
-            return "Число меньше искомого";
-        } else {
-            return "Число больше искомого";
         }
     }
 
