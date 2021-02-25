@@ -15,7 +15,7 @@ public class Player {
         return name;
     }
 
-    public int[] getAttemps() {
+    public int[] getAttempts() {
         return Arrays.copyOf(attempts, numberOfAttempts);
     }
 
@@ -28,7 +28,7 @@ public class Player {
     }
 
     public void setNumberOfAttempts(int numberOfAttempts) {
-        this.numberOfAttempts = numberOfAttempts+1;
+        this.numberOfAttempts = numberOfAttempts;
     }
 
     public int getNumber() {
