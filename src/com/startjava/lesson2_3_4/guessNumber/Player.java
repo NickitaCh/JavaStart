@@ -27,12 +27,12 @@ public class Player {
         return numberOfAttempts;
     }
 
-    public void setNumberOfAttempts(int numberOfAttempts) {
-        this.numberOfAttempts = numberOfAttempts;
+    public void setNumberOfAttempt(int numberOfAttempt) {
+        this.numberOfAttempts = numberOfAttempt;
     }
 
     public int getNumber() {
-        return attempts[numberOfAttempts];
+        return attempts[numberOfAttempts-1];
     }
 
     public void clear() {
