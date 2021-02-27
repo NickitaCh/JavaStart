@@ -15,8 +15,7 @@ public class GuessNumber {
     }
 
     public void play() throws IOException {
-        int secretNumber = 1;
-        //(int) (Math.random() * 101);
+        int secretNumber = (int) (Math.random() * 101);
         System.out.println("У вас 10 попыток");
 
         do {
