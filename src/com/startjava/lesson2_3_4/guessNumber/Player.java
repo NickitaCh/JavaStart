@@ -32,7 +32,7 @@ public class Player {
     }
 
     public int getNumber() {
-        return attempts[numberOfAttempts-1];
+        return attempts[numberOfAttempts - 1];
     }
 
     public void clear() {

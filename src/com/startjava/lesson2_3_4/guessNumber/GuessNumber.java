@@ -18,16 +18,22 @@ public class GuessNumber {
         int secretNumber = (int) (Math.random() * 101);
         System.out.println("У вас 10 попыток");
 
-        do {
+        for(int i = 0; i < 10; i++) {
             enterNumber(player1);
             if (compareNumbers(secretNumber, player1)) {
                 break;
+            }
+            if (player1.getNumberOfAttempts() == 10) {
+                System.out.println("У " + player1.getName() + " закончились попытки");
             }
             enterNumber(player2);
             if (compareNumbers(secretNumber, player2)) {
                 break;
             }
-        } while (true);
+            if (player2.getNumberOfAttempts() == 10) {
+                System.out.println("У " + player2.getName() + " закончились попытки");
+            }
+        }
         showAttempts(player1.getAttempts());
         showAttempts(player2.getAttempts());
         player1.clear();
@@ -41,21 +47,12 @@ public class GuessNumber {
     }
 
     private boolean compareNumbers(int secretNumber, Player player) {
-        if (player.getNumber() == secretNumber || player.getNumberOfAttempts() == 10) {
-            if (player.getNumber() == secretNumber) {
-                System.out.println("Вы угадали!");
-                System.out.println("Игрок " + player.getName() + " угадал число " + player.getNumber() + " с " + player.getNumberOfAttempts() + " попытки");
-            }
-            if(player.getNumberOfAttempts() == 10) {
-                System.out.println("У " + player.getName() + " закончились попытки");
-            }
+        if (player.getNumber() == secretNumber) {
+            System.out.println("Вы угадали!");
+            System.out.println("Игрок " + player.getName() + " угадал число " + player.getNumber() + " с " + player.getNumberOfAttempts() + " попытки");
             return true;
         } else {
-            if (player.getNumber() < secretNumber) {
-                System.out.println("Число меньше искомого");
-            } else {
-                System.out.println("Число больше искомого");
-            }
+            System.out.println(player.getNumber() > secretNumber ? "Число больше искомого" : "Число меньше искомого");
         } return false;
     }
 
