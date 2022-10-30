@@ -1,2 +1,2 @@
 # JavaStart
-First step in learning JAVA
+First step in JAVA
